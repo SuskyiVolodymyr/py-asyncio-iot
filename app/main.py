@@ -27,9 +27,7 @@ async def main() -> None:
     task1 = asyncio.create_task(service.register_device(hue_light))
     task2 = asyncio.create_task(service.register_device(speaker))
     task3 = asyncio.create_task(service.register_device(toilet))
-    await task1
-    await task2
-    await task3
+    await asyncio.gather(task1, task2, task3)
     hue_light_id = task1.result()
     speaker_id = task2.result()
     toilet_id = task3.result()
